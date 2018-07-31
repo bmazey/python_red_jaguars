@@ -1,4 +1,4 @@
-
+import person
 from flask import Flask
 from flask_restplus import Resource, Api
 
@@ -9,6 +9,8 @@ from flask_restplus import Resource, Api
 application = Flask(__name__)
 api = Api(application)
 
-
 @api.route("api/match")
+class Match(Resource):
+    def match(self):
+        for index in range(0, 10):
 

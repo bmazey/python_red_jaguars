@@ -25,7 +25,6 @@ class Person(Resource):            # Create a RESTful resource
         self.social_media = social_media
 
 
-
 def main():
     application.debug = True
     application.run()
