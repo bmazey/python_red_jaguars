@@ -11,18 +11,7 @@ api = Api(application)
 
 
 @api.route("/api/person")                   # Create a URL route to this resource
-class Person(Resource):            # Create a RESTful resource
-    def __init__(self, colour, hobby, food, sport, animal, artist, genre, season, vacation, social_media):
-        self.colour = colour
-        self.hobby = hobby
-        self.food = food
-        self.sport = sport
-        self.animal = animal
-        self.artist = artist
-        self.genre = genre
-        self.season = season
-        self.vacation = vacation
-        self.social_media = social_media
+# test
 
         # method for printing the instance
     def print_instance(self):
