@@ -26,11 +26,11 @@ person = api.model('person', {
     'social_media': fields.String(required=True, description='social_media'),
 })
 
-couple = api.model('couple', {
-    'person_a': fields.Nested(person),
-    'person_b': fields.Nested(person),
-
-})
+# couple = api.model('couple', {
+#     'person_a': fields.Nested(person),
+#     'person_b': fields.Nested(person),
+#
+# })
 
 
 def match(person_a, person_b):
@@ -48,8 +48,8 @@ TODO - create Person object from Model
 @api.route("/api/person")
 class Person(Resource):
     # @api.response(201, 'Rumor successfully created.')
-    @api.expect(couple)
-    @api.marshal_with()
+    @api.expect(person)
+    @api.marshal_with(person)
     def post(self):
         return
 
