@@ -32,14 +32,44 @@ couple = api.model('couple', {
 
 })
 
-
+# might not be able to do .colour
 def match(person_a, person_b):
     points = 0
-    for property in person:
-        if (person_a.property == person_b.property):
-                points += 1
 
-    return "You are " + str(points*10) + "% compatible"
+    if person_a.colour == person_b.colour:
+        points += 10
+
+    if person_a.hobby == person_b.hobby:
+        points += 10
+
+    if person_a.food == person_b.food:
+        points += 10
+
+    if person_a.sport == person_b.sport:
+        points +=10
+
+    if person_a.animal == person_b.animal:
+        points +=10
+
+    if person_a.artist == person_b.artist:
+        points +=10
+
+    if person_a.genre == person_b.genre:
+        points +=10
+
+    if person_a.season == person_b.season:
+        points +=10
+
+    if person_a.vacation == person_b.vacation:
+        points +=10
+
+    if person_a.social_media == person_b.social_media:
+        points +=10
+
+    return "You are " + str(points) + "% compatible"
+
+
+
 '''
 TODO - create Person object from Model
 '''
