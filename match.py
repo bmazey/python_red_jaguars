@@ -1,4 +1,4 @@
-import person
+from person import Person
 from flask import Flask
 from flask_restplus import Resource, Api
 
