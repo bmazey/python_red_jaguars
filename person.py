@@ -24,7 +24,11 @@ class Person(Resource):            # Create a RESTful resource
         self.vacation = vacation
         self.social_media = social_media
 
-
+        # method for printing the instance
+    def print_instance(self):
+        return '{} {} {} {} {} {} {} {} {} {}'.format(self.colour, self.hobby, self.food, self.sport, self.animal, self.artist, self.genre, self.season, self.vacation, self.social_media)
+# This is the instance example
+person_a = Person('red', 'reading', 'pizza', 'rugby', 'cat', 'selena gomez', 'dramatic', 'summer', 'sea_side', 'instagram')
 
 def main():
     application.debug = True
