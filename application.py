@@ -33,13 +33,13 @@ couple = api.model('couple', {
 })
 
 
-def find_match(person_a, person_b):
+def match(person_a, person_b):
     points = 0
     for property in person:
-        if (person_a.get() == person_b.property):
+        if (person_a.property == person_b.property):
                 points += 1
 
-
+    return "You are " + str(points*10) + "% compatible"
 '''
 TODO - create Person object from Model
 '''
