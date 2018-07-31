@@ -13,18 +13,6 @@ api = Api(application)
 TODO - create marshaller!
 '''
 
-person = api.model('person', {
-    'colour': fields.String(required=True, description='favourite colour'),
-    'hobby': fields.String(required=True, description='favourite hobby'),
-    'food': fields.String(required=True, description='favourite food'),
-    'sport': fields.String(required=True, description='favourite sport'),
-    'animal': fields.String(required=True, description='favourite animal'),
-    'artist': fields.String(required=True, description='favourite artist'),
-    'genre': fields.String(required=True, description='favourite genre'),
-    'season': fields.String(required=True, description='favourite season'),
-    'vacation': fields.String(required=True, description='favourite vacation'),
-    'social_media': fields.String(required=True, description='social_media'),
-})
 
 couple = api.model('couple', {
     'person_a': fields.Nested(person),
@@ -36,7 +24,7 @@ couple = api.model('couple', {
 def match(person_a, person_b):
     points = 0
 
-    if person_a.colour == person_b.colour:
+    if person_a.colour == person_b['colour']:
         points += 10
 
     if person_a.hobby == person_b.hobby:
@@ -69,6 +57,37 @@ def match(person_a, person_b):
     return "You are " + str(points) + "% compatible"
 
 
+# creating a person so that we can use it in the match api
+
+class Person:
+    def __init__(self, colour, hobby, food, sport, animal, artist, genre, season, vacation, social_media):
+        self.colour = colour
+        self.hobby = hobby
+        self.food = food
+        self.sport = sport
+        self.animal = animal
+        self.artist = artist
+        self.genre = genre
+        self.season = season
+        self.vacation = vacation
+        self.social_media = social_media
+
+    def create_person(self):
+        person = api.model('person', {
+            'colour': self.colour.String(required=True, description='favourite colour'),
+            'hobby': self.hobby.String(required=True, description='favourite hobby'),
+            'food': self.food.String(required=True, description='favourite food'),
+            'sport': self.sport.String(required=True, description='favourite sport'),
+            'animal': self.animal.String(required=True, description='favourite animal'),
+            'artist': self.artist.String(required=True, description='favourite artist'),
+            'genre': self.genre.String(required=True, description='favourite genre'),
+            'season': self.season.String(required=True, description='favourite season'),
+            'vacation': self.vacation.String(required=True, description='favourite vacation'),
+            'social_media': self.social_media.String(required=True, description='social_media'),
+        })
+        return person
+
+
 
 '''
 TODO - create Person object from Model
@@ -76,12 +95,15 @@ TODO - create Person object from Model
 
 
 @api.route("/api/person")
-class Person(Resource):
+class PersonRoute(Resource):
+
     # @api.response(201, 'Rumor successfully created.')
     @api.expect(couple)
     @api.marshal_with()
     def post(self):
-        return
+        person_a = Person('red', 'guitar', 'salad', 'football', 'dog', 'beyonce', 'sci-fi', 'winter', 'skiing',
+                          'snapchat')
+        return person_a.create_person()
 
 
 def main():
