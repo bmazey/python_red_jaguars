@@ -1,3 +1,4 @@
+import json
 from flask import Flask
 from flask_restplus import Resource, Api
 from flask_restplus import fields
@@ -9,50 +10,17 @@ from flask_restplus import fields
 application = Flask(__name__)
 api = Api(application)
 
-'''
-TODO - create marshaller!
-'''
-
-person = api.model('person', {
-    'name': fields.String(required=True, description='name of recipe'),
-    'content': fields.String(required=True, description='how its made'),
-    'food': fields.String(required=True, description='favourite food'),
-    'sport': fields.String(required=True, description='favourite sport'),
-    'animal': fields.String(required=True, description='favourite animal'),
-    'artist': fields.String(required=True, description='favourite artist'),
-    'genre': fields.String(required=True, description='favourite genre'),
-    'season': fields.String(required=True, description='favourite season'),
-    'vacation': fields.String(required=True, description='favourite vacation'),
-    'social_media': fields.String(required=True, description='social_media'),
-})
+# allowing us to access the json file with recipes
+with open('recipe.json') as file:
+    data = json.load(file)
 
 
-# couple = api.model('couple', {
-    # 'person_a': fields.Nested(person),
-    # 'person_b': fields.Nested(person),
-
-# })
-
-
-def match(person_a, person_b):
-    points = 0
-    for property in person:
-        if (person_a.property == person_b.property):
-                points += 1
-
-    return "You are " + str(points*10) + "% compatible"
-'''
-TODO - create Person object from Model
-'''
-
-
-@api.route("/api/person")
-class Person(Resource):
-    # @api.response(201, 'Rumor successfully created.')
-    @api.expect(person)
-    @api.marshal_with(person)
-    def post(self):
-        return
+@api.route("/api/recipe/<string:name>")
+class Recipe(Resource):
+    def get(self, name):
+        for index in range(0,9):
+            if data[index].get('name') == name:
+                return data[index].get('ingredients')
 
 
 def main():

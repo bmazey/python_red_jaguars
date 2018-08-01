@@ -23,12 +23,6 @@ recipe = api.model('recipe', {
 
 })
 
-recipe_id = api.model('recipe_id', {
-    'id': fields.String(readOnly=True, description='unique identifier of a recipe'),
-    'name': fields.String(required=True, description='name of recipe'),
-    'content': fields.String(required=True, description='how to make it'),
-})
-
 # recipe model class
 
 class Recipe(db.Model):
