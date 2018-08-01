@@ -18,9 +18,10 @@ with open('recipe.json') as file:
 @api.route("/api/recipe/<string:name>")
 class Recipe(Resource):
     def get(self, name):
-        for index in range(0,9):
+        for index in range(0, 9):
             if data[index].get('name') == name:
-                return data[index].get('ingredients')
+                my_recipe = data[index]
+                return my_recipe
 
 
 def main():
