@@ -12,4 +12,4 @@ artifacts:
   files:
     - application.py
     - requirements.txt
-    - recipie.json
+    - recipe.json
