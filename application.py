@@ -10,7 +10,7 @@ from flask_restplus import fields
 application = Flask(__name__)
 api = Api(application)
 
-# allowing us to access the json file with recipes
+# allowing us to access the json file with recipes test
 with open('recipe.json') as file:
     data = json.load(file)
 
