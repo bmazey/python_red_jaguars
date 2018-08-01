@@ -14,16 +14,21 @@ api = Api(application)
 with open('recipe.json') as file:
     data = json.load(file)
 
-
+# this class and the line below is creating our api
 @api.route("/api/recipe/<string:name>")
 class Recipe(Resource):
     def get(self, name):
+        # json file we're accessing is a list of jsons
+        # to check each json in the list we had to create a for loop and trace through each one
         for index in range(0, 9):
+            # the if statement is checking to see whether the name inputted is the same as the name at that position
             if data[index].get('name') == name:
+                # this creates a new variable that is assigned the recipe that matches the name inputted by the user
                 my_recipe = data[index]
+                # this then returns that recipe so that the user can see how to make the meal
                 return my_recipe
 
-
+# this is for testing purposes only
 def get_app():
     return application
 
