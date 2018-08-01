@@ -24,6 +24,10 @@ class Recipe(Resource):
                 return my_recipe
 
 
+def get_app():
+    return application
+
+
 def main():
     application.debug = True
     application.run()

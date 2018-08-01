@@ -1,37 +1,15 @@
 from unittest import TestCase
-from flask import Flask
-import json
+from application import get_app
 
-'''
-this does not work yet!!
-'''
+# adding comments for travis CI
 
 
-class appDBTests(TestCase):
-    def test_application(self):
+class RecipeTest(TestCase):
+    def setUp(self):
+        self.application = get_app()
+        self.client = self.application.test_client()
 
-
-
-    # def setUp(self):
-    #     """
-    #     Creates a new database for the unit test to use
-    #     """
-    #     self.app = Flask(__name__)
-    #     db.init_app(self.app)
-    #     with self.app.app_context():
-    #         db.create_all()
-    #         # self._db()  # Your function that adds test data.
-    #
-    # def tearDown(self):
-    #     """
-    #     Ensures that the database is emptied for next unit test
-    #     """
-    #     self.app = Flask(__name__)
-    #     db.init_app(self.app)
-    #     with self.app.app_context():
-    #         db.drop_all()
-    #
-    # def test_post_and_get(self):
-    #     response = self.app.test_client().post('/rumor', data=dict(name='Brownies', content='Use the betty crocker mix and add eggs, water, and vegetable oil. Then place in oven.'))
-    #     print(response.json())
-    #     self.assertTrue(200, response.status_code)
+    def test_simple_recipe_get(self):
+        response = self.client.get('/recipe')
+        print(response.get_json())
+        self.assertTrue(200, response.status_code)
