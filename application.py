@@ -14,8 +14,8 @@ TODO - create marshaller!
 '''
 
 person = api.model('person', {
-    'colour': fields.String(required=True, description='favourite colour'),
-    'hobby': fields.String(required=True, description='favourite hobby'),
+    'name': fields.String(required=True, description='name of recipe'),
+    'content': fields.String(required=True, description='how its made'),
     'food': fields.String(required=True, description='favourite food'),
     'sport': fields.String(required=True, description='favourite sport'),
     'animal': fields.String(required=True, description='favourite animal'),
@@ -26,11 +26,12 @@ person = api.model('person', {
     'social_media': fields.String(required=True, description='social_media'),
 })
 
-couple = api.model('couple', {
-    'person_a': fields.Nested(person),
-    'person_b': fields.Nested(person),
 
-})
+# couple = api.model('couple', {
+    # 'person_a': fields.Nested(person),
+    # 'person_b': fields.Nested(person),
+
+# })
 
 
 def match(person_a, person_b):
@@ -48,8 +49,8 @@ TODO - create Person object from Model
 @api.route("/api/person")
 class Person(Resource):
     # @api.response(201, 'Rumor successfully created.')
-    @api.expect(couple)
-    @api.marshal_with()
+    @api.expect(person)
+    @api.marshal_with(person)
     def post(self):
         return
 
