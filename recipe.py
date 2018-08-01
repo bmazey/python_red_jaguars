@@ -29,7 +29,7 @@ recipe_id = api.model('recipe_id', {
     'content': fields.String(required=True, description='how to make it'),
 })
 
-# recipe
+# recipe model class
 
 class Recipe(db.Model):
     id = db.Column(db.Text(80), primary_key=True)
@@ -54,10 +54,19 @@ def create_recipe(data):
 class RecipeRoute(Resource):
     # @api.response(201, 'Rumor successfully created.')
     @api.expect(recipe)
-    @api.marshal_with(recipe)
+    @api.marshal_with(recipe_id)
     def post(self):
-        return
+        new_recipe = create_recipe(request.json)
+        return Recipe.query.filter(Recipe.id == new_recipe.id).one()
 
+# id is a url-encoded variable
+@api.route("/recipe/<string:id>")
+class RecipeIdRoute(Resource):
+    @api.marshal_with(recipe_id)
+    # id becomes a method param in this GET
+    def get(self, id):
+        # use sqlalchemy to get a rumor by ID
+        return Recipe.query.filter(Recipe.id == id).one()
 
 
 def main():
