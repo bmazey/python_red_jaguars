@@ -2,6 +2,7 @@ import json
 from flask import Flask
 from flask_restplus import Resource, Api
 from flask_restplus import fields
+import sys
 
 
 # welcome to flask: http://flask.pocoo.org/
@@ -11,7 +12,7 @@ application = Flask(__name__)
 api = Api(application)
 
 # allowing us to access the json file with recipes
-with open('recipe.json') as file:
+with open('recipe.json',encoding='utf-8') as file:
     data = json.load(file)
 
 # this class and the line below is creating our api
