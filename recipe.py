@@ -53,6 +53,9 @@ def create_recipe(data):
 @api.route("/api/recipe")
 class RecipeRoute(Resource):
     # @api.response(201, 'Rumor successfully created.')
+    def get(self):
+        return {'Brownies': 'Use the betty crocker mix and add eggs, water, and vegetable oil. Then place in oven.'}
+
     @api.expect(recipe)
     @api.marshal_with(recipe_id)
     def post(self):
